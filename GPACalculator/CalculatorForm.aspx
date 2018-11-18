@@ -9,18 +9,21 @@
     <title>Calculator</title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="mainForm" runat="server">
         <div>
-            <table style="width:100%;">
-                <tr class="Table-Title">
-                    <td>Course Code</td>
-                    <td>Course Name</td>
-                    <td>Course Hours</td>
-                    <td>Grade</td>
-                </tr>
-                <uc1:ClassTable runat="server" ID="ClassTable" />
-            </table>
-            <asp:Button ID="btnCalc" runat="server" Text="Calculate GPA" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear Form" />
+            <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" />
+            <asp:Button ID="btnCalc" runat="server" Text="Calculate" />
+        </div>
+        <div>
+            <asp:Table ID="mainTable" runat="server" width="100%">
+                <asp:TableRow ID="headerRow">
+                    <asp:TableCell>Course Code</asp:TableCell>
+                    <asp:TableCell>Course Name</asp:TableCell>
+                    <asp:TableCell>Grade</asp:TableCell>
+                    <asp:TableCell>Course Hours</asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
         </div>
     </form>
 </body>
