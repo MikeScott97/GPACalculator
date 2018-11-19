@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link href="~/calcFormStyle.css" rel="Stylesheet" type="text/css"/>
+    <link href="~/calcFormStyle.css" rel="Stylesheet" type="text/css" />
     <title>Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <form id="mainForm" runat="server">
@@ -16,8 +17,26 @@
             <asp:Button ID="btnCalc" runat="server" Text="Calculate" />
         </div>
         <div>
-            <asp:Table ID="mainTable" runat="server" width="100%">
+            <asp:Table ID="mainTable" runat="server" Width="100%">
                 <asp:TableRow ID="headerRow">
+                    <asp:TableCell>Course Code</asp:TableCell>
+                    <asp:TableCell>Course Name</asp:TableCell>
+                    <asp:TableCell>Grade</asp:TableCell>
+                    <asp:TableCell>Course Hours</asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>Course Code</asp:TableCell>
+                    <asp:TableCell>Course Name</asp:TableCell>
+                    <asp:TableCell>Grade</asp:TableCell>
+                    <asp:TableCell>Course Hours</asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>Course Code</asp:TableCell>
+                    <asp:TableCell>Course Name</asp:TableCell>
+                    <asp:TableCell>Grade</asp:TableCell>
+                    <asp:TableCell>Course Hours</asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
                     <asp:TableCell>Course Code</asp:TableCell>
                     <asp:TableCell>Course Name</asp:TableCell>
                     <asp:TableCell>Grade</asp:TableCell>
