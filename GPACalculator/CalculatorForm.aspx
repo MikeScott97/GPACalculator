@@ -10,18 +10,22 @@
 </head>
 <body>
     <form id="mainForm" runat="server">
-        <div>
+        <div style="display:inline-block; width: 103px; height: 24px;">
             <asp:Button ID="btnClear" runat="server" Text="Clear Form" />
+            <br />
+            <br />
             <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" />
+            <br />
+            <br />
             <asp:Button ID="btnCalc" runat="server" Text="Calculate" />
         </div>
-        <div>
+        <div style="display:inline-block; width: 500px;">
             <asp:Table ID="mainTable" runat="server" width="100%">
                 <asp:TableRow ID="headerRow">
                     <asp:TableCell>Course Code</asp:TableCell>
                     <asp:TableCell>Course Name</asp:TableCell>
-                    <asp:TableCell>Grade</asp:TableCell>
                     <asp:TableCell>Course Hours</asp:TableCell>
+                    <asp:TableCell>Grades</asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
         </div>
