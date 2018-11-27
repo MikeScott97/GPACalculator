@@ -16,7 +16,7 @@ namespace GPACalculator
 
         protected void btnLoad_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CalculatorForm.aspx?id=" + Eval(txtCourseAmt.Text));
+            Response.Redirect("CalculatorForm.aspx?id=" + txtCourseAmt.Text, false);
         }
     }
 }
