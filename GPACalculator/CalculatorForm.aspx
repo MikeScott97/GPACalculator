@@ -14,35 +14,22 @@
         <div>
             <asp:Button ID="btnClear" runat="server" Text="Clear Form" />
             <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" />
-            <asp:Button ID="btnCalc" runat="server" Text="Calculate" />
+            <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" />
         </div>
         <div>
-            <asp:Table ID="mainTable" runat="server" Width="100%">
-                <asp:TableRow ID="headerRow">
-                    <asp:TableCell>Course Code</asp:TableCell>
-                    <asp:TableCell>Course Name</asp:TableCell>
-                    <asp:TableCell>Grade</asp:TableCell>
-                    <asp:TableCell>Course Hours</asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow>
-                    <asp:TableCell>Course Code</asp:TableCell>
-                    <asp:TableCell>Course Name</asp:TableCell>
-                    <asp:TableCell>Grade</asp:TableCell>
-                    <asp:TableCell>Course Hours</asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow>
-                    <asp:TableCell>Course Code</asp:TableCell>
-                    <asp:TableCell>Course Name</asp:TableCell>
-                    <asp:TableCell>Grade</asp:TableCell>
-                    <asp:TableCell>Course Hours</asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow>
-                    <asp:TableCell>Course Code</asp:TableCell>
-                    <asp:TableCell>Course Name</asp:TableCell>
-                    <asp:TableCell>Grade</asp:TableCell>
-                    <asp:TableCell>Course Hours</asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
+            <table>
+                <tr>
+                    <td>Course Code</td>
+                    <td>Course Name</td>
+                    <td>Course Hours</td>
+                    <td>Grade</td>
+                </tr>
+                <asp:Repeater ID="Repeater1" runat="server">
+                    <ItemTemplate>
+                        <uc1:ClassTable runat="server" ID="ClassTable" />
+                    </ItemTemplate>
+            </asp:Repeater>
+            </table>
         </div>
     </form>
 </body>

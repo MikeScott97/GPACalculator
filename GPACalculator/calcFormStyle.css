@@ -4,3 +4,11 @@
     font-size: 16px;
     background-color:rgb(128, 128, 128);
 }
+.left, .right{
+    float:left;
+    width:20%;
+}
+.middle {
+    float: left;
+    width: 25%;
+}
