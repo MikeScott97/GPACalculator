@@ -17,19 +17,14 @@
             <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" />
         </div>
         <div>
-            <table>
-                <tr>
-                    <td>Course Code</td>
-                    <td>Course Name</td>
-                    <td>Course Hours</td>
-                    <td>Grade</td>
-                </tr>
-                <asp:Repeater ID="Repeater1" runat="server">
-                    <ItemTemplate>
-                        <uc1:ClassTable runat="server" ID="ClassTable" />
-                    </ItemTemplate>
-            </asp:Repeater>
-            </table>
+            <asp:Table ID="mainTable" runat="server">
+                <asp:TableHeaderRow ID="headerRow">
+                    <asp:TableHeaderCell>Course Code</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Course Name</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Course Hours</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Course Grade</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
         </div>
     </form>
 </body>

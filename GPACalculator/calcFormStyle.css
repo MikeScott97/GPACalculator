@@ -3,6 +3,7 @@
     font-weight: bold;
     font-size: 16px;
     background-color:rgb(128, 128, 128);
+    border-style:solid;
 }
 .left, .right{
     float:left;

@@ -49,12 +49,21 @@ namespace GPACalculator {
         protected global::System.Web.UI.WebControls.Button btnCalc;
         
         /// <summary>
-        /// Repeater1 control.
+        /// mainTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.Table mainTable;
+        
+        /// <summary>
+        /// headerRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderRow headerRow;
     }
 }
