@@ -72,25 +72,20 @@
   <ItemGroup>
     <Content Include="calcFormStyle.css" />
     <Content Include="CalculatorForm.aspx" />
-    <Content Include="ClassTable.ascx" />
     <Content Include="Global.asax" />
     <Content Include="landingPage.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations.cs" />
     <Compile Include="CalculatorForm.aspx.cs">
       <DependentUpon>CalculatorForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CalculatorForm.aspx.designer.cs">
       <DependentUpon>CalculatorForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClassTable.ascx.cs">
-      <DependentUpon>ClassTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClassTable.ascx.designer.cs">
-      <DependentUpon>ClassTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

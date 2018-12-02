@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 namespace GPACalculator
 {
@@ -11,38 +14,50 @@ namespace GPACalculator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int max = 5;//int.Parse(Request.QueryString["id"]);
-            for (int i = 0; i > max; i++)
-            {
-                TableRow row = new TableRow();
-                TableCell cellCode = new TableCell();
-                TableCell cellName = new TableCell();
-                TableCell cellGrade = new TableCell();
-                TableCell cellHours = new TableCell();
-                row.ID = $"row{i}";
-                cellCode.ID = $"courseCode{i}";
-                cellName.ID = $"courseName{i}";
-                cellGrade.ID = $"courseGrade{i}";
-                cellHours.ID = $"courseHours{i}";
-                cellCode.Text = "test123";
-                cellName.Text = "History of cars 2";
-                cellGrade.Text = "97";
-                cellHours.Text = "42";
-                row.Cells.Add(cellCode);
-                row.Cells.Add(cellName);
-                row.Cells.Add(cellGrade);
-                row.Cells.Add(cellHours);
-                mainTable.Rows.Add(row);
-            }
+            //if (Session["table"] == null)//(Request.QueryString["id"].Length > 0)
+            //{
+            //    if (int.TryParse(Request.QueryString["id"], out int Classes))
+            //    {
+            //        List<TableRow> Rows = new List<TableRow>();
+            //        for (int i = 0; i < Classes; i++)
+            //        {
+            //            TableRow Row = new TableRow();
+            //            Row.Cells.Add(new TableCell() { Text = "Course Code" });
+            //            Row.Cells.Add(new TableCell() { Text = "Course Name" });
+            //            Row.Cells.Add(new TableCell() { Text = "Grade" });
+            //            Row.Cells.Add(new TableCell() { Text = "Course Hours" });
+            //            mainTable.Controls.Add(Row);
+            //            Rows.Add(Row);
+            //        }
+            //        Session["table"] = Rows;
+            //    }
+            //}
+            //else
+            //{
+            //    List<TableRow> Rows = Session["table"] as List<TableRow>;
+            //    foreach (var a in Rows)
+            //    {
+            //        mainTable.Controls.Add(a);
+            //    }
+            //}
         }
 
         protected void btnAddClass_Click(object sender, EventArgs e)
         {
+            //List<TableRow> Rows = Session["table"] as List<TableRow>;
+            //foreach (var a in Rows)
+            //{
+            //    programGridView.Controls.Add(a);
+            //}
+
+            //Rows.Add();
+            //Session["table"] = Rows;
 
         }
 
         protected void btnCalc_Click(object sender, EventArgs e)
-        { 
+        {
+
         }
     }
 }

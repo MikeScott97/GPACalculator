@@ -49,21 +49,21 @@ namespace GPACalculator {
         protected global::System.Web.UI.WebControls.Button btnCalc;
         
         /// <summary>
-        /// mainTable control.
+        /// programGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table mainTable;
+        protected global::System.Web.UI.WebControls.GridView programGridView;
         
         /// <summary>
-        /// headerRow control.
+        /// coursesDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow headerRow;
+        protected global::System.Web.UI.WebControls.SqlDataSource coursesDataSource;
     }
 }
