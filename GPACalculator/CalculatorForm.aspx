@@ -12,7 +12,7 @@
 <body>
     <form id="mainForm" runat="server">
         <div>
-            <asp:Button ID="btnClear" runat="server" Text="Clear Form" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear Form" OnClick="btnClear_Click" />
             <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" />
             <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" />
         </div>
