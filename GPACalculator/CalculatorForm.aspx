@@ -23,6 +23,7 @@
                     <asp:TableHeaderCell>Course Name</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Course Hours</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Course Grade</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>X</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
