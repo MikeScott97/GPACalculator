@@ -168,5 +168,19 @@ namespace GPACalculator
         {
             Session["table"] = new List<TableRow>();
         }
+
+        protected void makeDataTable()
+        {
+            string connString = SqlDataSource1.ConnectionString;
+            string query = "select * from [Table]";
+            SqlConnection connection = new SqlConnection(connString);
+            SqlCommand cmd = new SqlCommand(query, connection);
+            connection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+            dataAdapter.Fill(dt);
+            connection.Close();
+            dataAdapter.Dispose();
+
+        }
     }
 }
