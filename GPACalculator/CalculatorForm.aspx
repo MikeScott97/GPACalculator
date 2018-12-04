@@ -27,6 +27,7 @@
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CoursesConnectionString %>" SelectCommand="SELECT * FROM [Table]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GPACalculator
-{
-
-
-    public partial class CalculatorForm
-    {
-
+namespace GPACalculator {
+    
+    
+    public partial class CalculatorForm {
+        
         /// <summary>
         /// mainForm control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
-
+        
         /// <summary>
         /// btnClear control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
-
+        
         /// <summary>
         /// btnAddClass control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddClass;
-
+        
         /// <summary>
         /// btnCalc control.
         /// </summary>
@@ -49,7 +47,7 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCalc;
-
+        
         /// <summary>
         /// mainTable control.
         /// </summary>
@@ -58,7 +56,7 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table mainTable;
-
+        
         /// <summary>
         /// headerRow control.
         /// </summary>
@@ -67,14 +65,14 @@ namespace GPACalculator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderRow headerRow;
-
+        
         /// <summary>
-        /// TextBox1 control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }
