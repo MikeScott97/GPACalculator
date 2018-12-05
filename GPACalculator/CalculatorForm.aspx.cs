@@ -158,7 +158,13 @@ namespace GPACalculator
                     }
                     else
                     {
-                        throw new Exception("Class needs to be retaken, I put this here to stop your program and tell you");
+                        Unfilled.Add(new ClassHolder
+                        {
+                            ClassName = dt.Rows[i].ItemArray[1].ToString(),
+                            CreditScore = int.Parse(dt.Rows[i].ItemArray[2].ToString())
+                        });
+                        Grades.UnfilledCount++;
+                        Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
                     }
                 }
                 else
