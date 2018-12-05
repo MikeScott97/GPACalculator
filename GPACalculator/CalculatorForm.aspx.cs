@@ -152,8 +152,8 @@ namespace GPACalculator
                 {
                     if (GradeValues.Contains((Grade = GetGrade(Grade))))
                     {
-                        Grades.QualityPoints += (Grade * int.Parse(gradeInputs[i].Text));
-                        Grades.FilledHours += int.Parse(gradeInputs[i].Text);
+                        Grades.QualityPoints += (Grade * Convert.ToInt32(dt.Rows[i].ItemArray[2]));
+                        Grades.FilledHours += Convert.ToInt32(dt.Rows[i].ItemArray[2]);
                         Grades.FilledCount++;
                     }
                     else
@@ -313,7 +313,7 @@ namespace GPACalculator
         {
             //pull the sql table from the database
             string connString = SqlDataSource1.ConnectionString;
-            string query = "select * from [Table]";
+            string query = "select * from [Classes]";
             SqlConnection connection = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();

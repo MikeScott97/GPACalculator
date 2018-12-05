@@ -30,7 +30,7 @@
             <br />
             <asp:Label runat="server" ID="lblMinGradeOut" Text=""></asp:Label>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CoursesConnectionString %>" SelectCommand="SELECT * FROM [Table]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CoursesConnectionString %>" SelectCommand="SELECT * FROM [Classes]"></asp:SqlDataSource>
         <asp:ListBox ID="ListBox1" runat="server" Width="184px"></asp:ListBox>
     </form>
 </body>
