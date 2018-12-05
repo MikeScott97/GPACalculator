@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CalculatorForm.aspx.cs" Inherits="GPACalculator.CalculatorForm" %>
 
-<%@ Register Src="~/ClassTable.ascx" TagPrefix="uc1" TagName="ClassTable" %>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -27,7 +25,12 @@
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CoursesConnectionString %>" SelectCommand="SELECT * FROM [Table]"></asp:SqlDataSource>
+        <div>
+            <asp:Label runat="server" ID="lblGPAOut" Text=""></asp:Label>
+            <br />
+            <asp:Label runat="server" ID="lblMinGradeOut" Text=""></asp:Label>
+        </div>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CoursesConnectionString %>" SelectCommand="SELECT * FROM [Classes]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

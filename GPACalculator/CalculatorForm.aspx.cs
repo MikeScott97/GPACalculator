@@ -113,21 +113,52 @@ namespace GPACalculator
         protected void btnCalc_Click(object sender, EventArgs e)
         {
             List<TextBox> gradeInputs = Session["gradeTextboxes"] as List<TextBox>;
+            //instantiate variable for calculations
             int totalHours = 0;
-            int totalGrades = 0;
+            int completedQualityPoints = 0;
             int completedHours = 0;
-            int incompleteHours = 0;
+            //lists for incomplete grades
+            List<int> incompleteCourses = new List<int>();
+            List<string> incompleteCourseName = new List<string>();
             int tempGrade = 0;
+            int courseHours = 0;
             //collects all of the hours of each class
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                tempGrade = Convert.ToInt32(gradeInputs[i].Text);
-                totalHours = totalHours + Convert.ToInt32(dt.Rows[i].ItemArray[2]);
-                if (tempGrade >= 50)
+                //grabs the cell value of course hours
+                courseHours = Convert.ToInt32(dt.Rows[i].ItemArray[2]);
+                //grab user value for grade
+                if (string.IsNullOrEmpty(gradeInputs[i].Text))
                 {
-                    totalGrades = totalGrades + GetGrade(tempGrade);
+                    tempGrade = 0;//set to 0 for null
                 }
+                else
+                {
+                    tempGrade = Convert.ToInt32(gradeInputs[i].Text);//collect input if not null
+                }
+                if(tempGrade < 50)
+                {
+                    //if the course hasnt been passed add the course hours to a list
+                    incompleteCourses.Add(courseHours);
+                    incompleteCourseName.Add(dt.Rows[i].ItemArray[1].ToString());
+                }
+                else
+                {
+                    //add up the quality points and completed hours
+                    completedQualityPoints += courseHours*GetGrade(tempGrade);
+                    completedHours += courseHours;
+                }
+                //add up total hours
+                totalHours = totalHours + courseHours;
             }
+            //calculate GPA with method call
+            double GPA = Calculate.CalcGPA(completedQualityPoints, completedHours);
+            //calculate the student's missing quality points
+            double missingQP = Calculate.CalcMissingQP(completedQualityPoints, totalHours);
+            //output to label
+            lblGPAOut.Text = GPA.ToString("0.00");
+
+            Calculate.Perm(incompleteCourses, incompleteCourseName, missingQP);
         }
 
         protected void CheckControlText(TextBox Box)
@@ -172,8 +203,9 @@ namespace GPACalculator
 
         protected void makeDataTable()
         {
+            //pull the sql table from the database
             string connString = SqlDataSource1.ConnectionString;
-            string query = "select * from [Table]";
+            string query = "select * from [Classes]";
             SqlConnection connection = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();
@@ -185,7 +217,7 @@ namespace GPACalculator
         }
         public static int GetGrade(int Grade)
         {
-            if (Grade <= 100 || Grade > 0)
+            if (Grade <= 100 && Grade >= 50)
             {
                 if (Grade >= 80)
                 {

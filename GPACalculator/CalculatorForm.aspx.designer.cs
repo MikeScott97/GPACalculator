@@ -67,6 +67,24 @@ namespace GPACalculator {
         protected global::System.Web.UI.WebControls.TableHeaderRow headerRow;
         
         /// <summary>
+        /// lblGPAOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGPAOut;
+        
+        /// <summary>
+        /// lblMinGradeOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMinGradeOut;
+        
+        /// <summary>
         /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
