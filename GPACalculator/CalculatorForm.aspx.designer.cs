@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GPACalculator {
-    
-    
-    public partial class CalculatorForm {
-        
+namespace GPACalculator
+{
+
+
+    public partial class CalculatorForm
+    {
+
         /// <summary>
         /// mainForm control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
-        
+
         /// <summary>
         /// btnClear control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
-        
+
         /// <summary>
         /// btnAddClass control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddClass;
-        
+
         /// <summary>
         /// btnCalc control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCalc;
-        
+
         /// <summary>
         /// mainTable control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table mainTable;
-        
+
         /// <summary>
         /// headerRow control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderRow headerRow;
-        
+
         /// <summary>
         /// lblGPAOut control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblGPAOut;
-        
+
         /// <summary>
         /// lblMinGradeOut control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMinGradeOut;
-        
+
         /// <summary>
         /// SqlDataSource1 control.
         /// </summary>
@@ -92,5 +94,14 @@ namespace GPACalculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
+        /// <summary>
+        /// ListBox1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBox1;
     }
 }
