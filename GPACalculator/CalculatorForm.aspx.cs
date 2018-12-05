@@ -144,6 +144,8 @@ namespace GPACalculator
                 if (GradeValues.Contains((Grade = GetGrade(int.Parse(gradeInputs[i].Text)))))
                 {
                     Grades.QualityPoints += (Grade * int.Parse(gradeInputs[i].Text));
+                    Grades.FilledHours += int.Parse(gradeInputs[i].Text);
+                    Grades.FilledCount++;
                 }
                 else if (Grade == 0)
                 {
@@ -158,7 +160,7 @@ namespace GPACalculator
                 Grades.TotalCount++;
             }
             //calculate GPA with method call
-            Grades.GPA = (double)Grades.QualityPoints / (double)Grades.FilledHours;
+            Grades.GPA = Grades.QualityPoints / Grades.FilledHours;
             //calculate the student's missing quality points
             double QPneeded = ((Grades.TotalHours * 2) - Grades.QualityPoints);
             //output to label
