@@ -46,7 +46,7 @@ namespace GPACalculator
                         TableRow Row = new TableRow();
                         //for loop to grab every column from the sql table
                         for (int columnIndex = 0; columnIndex < dt.Columns.Count; columnIndex++)
-                        {   
+                        {
                             //checks for grade category and creates a textbox
                             if (columnIndex == 3)
                             {
@@ -71,7 +71,7 @@ namespace GPACalculator
                         mainTable.Controls.Add(Row);
                         Rows.Add(Row);
                     }
-                        
+
                     //saves rows to session    
                     Session["table"] = Rows;
                     Session["gradeTextboxes"] = gradeInput;
@@ -110,56 +110,142 @@ namespace GPACalculator
             Session["table"] = Rows;
         }
 
+        public struct SGrades
+        {
+            public int FilledCount;//amount of filled grades
+            public int FilledHours;//amount of filled hours
+            public int TotalCount;//total amount of grades
+            public int UnfilledCount;//amount of missing grades
+            public int QualityPoints;//amount of quality points the student has
+            public int TotalHours;//total amount of course hours
+            public int MissingHours;//missing hours for missing classes
+            public double GPA;//student's current GPA
+        }
+        int[] GradeValues = new int[] { 1, 2, 3, 4 };
         protected void btnCalc_Click(object sender, EventArgs e)
         {
             List<TextBox> gradeInputs = Session["gradeTextboxes"] as List<TextBox>;
-            //instantiate variable for calculations
-            int totalHours = 0;
-            int completedQualityPoints = 0;
-            int completedHours = 0;
-            //lists for incomplete grades
-            List<int> incompleteCourses = new List<int>();
-            List<string> incompleteCourseName = new List<string>();
-            int tempGrade = 0;
-            int courseHours = 0;
-            //collects all of the hours of each class
+            SGrades Grades = new SGrades
+            {
+                FilledCount = 0,
+                FilledHours = 0,
+                TotalCount = 0,
+                UnfilledCount = 0,
+                QualityPoints = 0,
+                TotalHours = 0,
+                MissingHours = 0,
+                GPA = 0
+            };
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                //grabs the cell value of course hours
-                courseHours = Convert.ToInt32(dt.Rows[i].ItemArray[2]);
-                //grab user value for grade
-                if (string.IsNullOrEmpty(gradeInputs[i].Text))
+                Grades.TotalHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
+                int Grade;
+                if (GradeValues.Contains((Grade = GetGrade(int.Parse(gradeInputs[i].Text)))))
                 {
-                    tempGrade = 0;//set to 0 for null
+                    Grades.QualityPoints += (Grade * int.Parse(gradeInputs[i].Text));
+                }
+                else if (Grade == 0)
+                {
+                    throw new Exception("Class needs to be retaken, I put this here to stop your program and tell you");
                 }
                 else
                 {
-                    tempGrade = Convert.ToInt32(gradeInputs[i].Text);//collect input if not null
+
+                    Grades.UnfilledCount++;
+                    Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
                 }
-                if(tempGrade < 50)
-                {
-                    //if the course hasnt been passed add the course hours to a list
-                    incompleteCourses.Add(courseHours);
-                    incompleteCourseName.Add(dt.Rows[i].ItemArray[1].ToString());
-                }
-                else
-                {
-                    //add up the quality points and completed hours
-                    completedQualityPoints += courseHours*GetGrade(tempGrade);
-                    completedHours += courseHours;
-                }
-                //add up total hours
-                totalHours = totalHours + courseHours;
+                Grades.TotalCount++;
             }
             //calculate GPA with method call
-            double GPA = Calculate.CalcGPA(completedQualityPoints, completedHours);
+            Grades.GPA = (double)Grades.QualityPoints / (double)Grades.FilledHours;
             //calculate the student's missing quality points
-            double missingQP = Calculate.CalcMissingQP(completedQualityPoints, totalHours);
+            double QPneeded = ((Grades.TotalHours * 2) - Grades.QualityPoints);
             //output to label
-            lblGPAOut.Text = GPA.ToString("0.00");
+            lblGPAOut.Text = Grades.GPA.ToString("0.00");
 
-            Calculate.Perm(incompleteCourses, incompleteCourseName, missingQP);
+            //Perm(Grades, QPneeded);
         }
+        string[] StaticGrades = new string[] { "D", "C", "B", "A" };
+        static int[] set = { 4, 3, 2, 1 };
+        int k, n = 4;
+        int[] buf;
+        //private void Perm(SGrades Grades, Double gpaNeeded)
+        //{
+        //    //number of missing classes
+        //    k = Grades.UnfilledCount;
+        //    //array of length missing classes
+        //    buf = new int[k];
+        //    //instantiate list for the lowest grade possble to pass
+        //    List<string> lowestGrade = new List<string>();
+        //    //return list of lowestgrade
+        //    List<string> lowest = rec(0, 0, Grades, gpaNeeded, lowestGrade);
+        //    //check for if the student can pass the course
+        //    //if (listBox1.Items.Count <= 0)
+        //    //{
+        //    //    listBox1.Items.Add("No grades will make you pass, talk to your counselor about retaking courses");
+        //    //}
+
+        //    //listBox1.Items.Add("");
+        //    //listBox1.Items.Add("The Lowest grades you will need to pass in each course are:");
+
+        //    //output the lowest grade possible in each course
+        //    //foreach (string a in lowest)
+        //    //{
+        //    //    listBox1.Items.Add(a);
+        //    //}
+        //}
+
+        //private List<string> rec(int ind, int begin, SGrades Grades, Double gpaNeeded, List<string> lowestGrade)
+        //{
+        //    //loop for going through each grade value
+        //    for (int i = begin; i < n; i++)
+        //    {
+        //        //adds the grade to the array
+        //        buf[ind] = set[i];
+        //        //check if loop is less than the missing grade count
+        //        if (ind + 1 < k)
+        //        {
+        //            //if yes call recursive function
+        //            rec(ind + 1, i, Grades, gpaNeeded, lowestGrade);
+
+        //        }
+        //        //else check quality point and output to listbox
+        //        else
+        //        {
+        //            double QualityPoints = 0;
+        //            //loop for adding up the amount of quality points in array buf
+        //            for (int idx = 0; idx < buf.Length; idx++)
+        //            {
+        //                QualityPoints += buf[idx] * UnfilledControls[idx].CreditScore;
+        //            }
+        //            //check if buf quality points is bigger than the quality points needed to pass the course
+        //            if ((QualityPoints) >= gpaNeeded)
+        //            {
+        //                List<string> SendingOut = new List<string>();
+        //                //loop through each value in array buff
+        //                foreach (int X in buf)
+        //                {
+        //                    //add them to a list
+        //                    SendingOut.Add(StaticGrades[X - 1]);
+        //                }
+        //                //output sendingout as a joined string
+        //                ///////////////////////////////////////////////////////////////////////////////////////////////////listBox1.Items.Add(string.Join(",", SendingOut));
+        //                //clear lowest grade
+        //                lowestGrade.Clear();
+        //                //set each unfilled class name with its lowest possible grade
+        //                for (int index = 0; index < UnfilledControls.Count; index++)
+        //                {
+        //                    lowestGrade.Add(UnfilledControls[index].ClassName + ":  " + SendingOut[index]);
+        //                }
+        //            }
+        //            //output for the amount of quality points in buf
+        //            //Console.WriteLine(QualityPoints);
+        //        }
+        //    }
+        //    //returns the lowest grades output to the listbox
+        //    return lowestGrade;
+        //}
 
         protected void CheckControlText(TextBox Box)
         {
