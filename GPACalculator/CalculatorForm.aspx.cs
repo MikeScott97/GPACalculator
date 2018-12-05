@@ -10,6 +10,13 @@ using System.Data.SqlClient;
 
 namespace GPACalculator
 {
+    public class ClassHolder
+    {
+        public int CreditScore { get; set; }
+        public string GradeString { get; set; }
+        public string ClassName { get; set; }
+    }
+
     public partial class CalculatorForm : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
@@ -122,6 +129,7 @@ namespace GPACalculator
             public double GPA;//student's current GPA
         }
         int[] GradeValues = new int[] { 1, 2, 3, 4 };
+        List<ClassHolder> Unfilled = new List<ClassHolder>();
         protected void btnCalc_Click(object sender, EventArgs e)
         {
             List<TextBox> gradeInputs = Session["gradeTextboxes"] as List<TextBox>;
@@ -140,20 +148,26 @@ namespace GPACalculator
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Grades.TotalHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
-                int Grade;
-                if (GradeValues.Contains((Grade = GetGrade(int.Parse(gradeInputs[i].Text)))))
+                if (int.TryParse(gradeInputs[i].Text, out int Grade))
                 {
-                    Grades.QualityPoints += (Grade * int.Parse(gradeInputs[i].Text));
-                    Grades.FilledHours += int.Parse(gradeInputs[i].Text);
-                    Grades.FilledCount++;
-                }
-                else if (Grade == 0)
-                {
-                    throw new Exception("Class needs to be retaken, I put this here to stop your program and tell you");
+                    if (GradeValues.Contains((Grade = GetGrade(Grade))))
+                    {
+                        Grades.QualityPoints += (Grade * int.Parse(gradeInputs[i].Text));
+                        Grades.FilledHours += int.Parse(gradeInputs[i].Text);
+                        Grades.FilledCount++;
+                    }
+                    else
+                    {
+                        throw new Exception("Class needs to be retaken, I put this here to stop your program and tell you");
+                    }
                 }
                 else
                 {
-
+                    Unfilled.Add(new ClassHolder
+                    {
+                        ClassName = dt.Rows[i].ItemArray[1].ToString(),
+                        CreditScore = int.Parse(dt.Rows[i].ItemArray[2].ToString())
+                    });
                     Grades.UnfilledCount++;
                     Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
                 }
@@ -166,88 +180,88 @@ namespace GPACalculator
             //output to label
             lblGPAOut.Text = Grades.GPA.ToString("0.00");
 
-            //Perm(Grades, QPneeded);
+            Perm(Grades, QPneeded);
         }
         string[] StaticGrades = new string[] { "D", "C", "B", "A" };
         static int[] set = { 4, 3, 2, 1 };
         int k, n = 4;
         int[] buf;
-        //private void Perm(SGrades Grades, Double gpaNeeded)
-        //{
-        //    //number of missing classes
-        //    k = Grades.UnfilledCount;
-        //    //array of length missing classes
-        //    buf = new int[k];
-        //    //instantiate list for the lowest grade possble to pass
-        //    List<string> lowestGrade = new List<string>();
-        //    //return list of lowestgrade
-        //    List<string> lowest = rec(0, 0, Grades, gpaNeeded, lowestGrade);
-        //    //check for if the student can pass the course
-        //    //if (listBox1.Items.Count <= 0)
-        //    //{
-        //    //    listBox1.Items.Add("No grades will make you pass, talk to your counselor about retaking courses");
-        //    //}
+        private void Perm(SGrades Grades, Double gpaNeeded)
+        {
+            //number of missing classes
+            k = Grades.UnfilledCount;
+            //array of length missing classes
+            buf = new int[k];
+            //instantiate list for the lowest grade possble to pass
+            List<string> lowestGrade = new List<string>();
+            //return list of lowestgrade
+            List<string> lowest = rec(0, 0, Grades, gpaNeeded, lowestGrade);
+            //check for if the student can pass the course
+            if (ListBox1.Items.Count <= 0)
+            {
+                ListBox1.Items.Add("No grades will make you pass, talk to your counselor about retaking courses");
+            }
 
-        //    //listBox1.Items.Add("");
-        //    //listBox1.Items.Add("The Lowest grades you will need to pass in each course are:");
+            ListBox1.Items.Add("");
+            ListBox1.Items.Add("The Lowest grades you will need to pass in each course are:");
 
-        //    //output the lowest grade possible in each course
-        //    //foreach (string a in lowest)
-        //    //{
-        //    //    listBox1.Items.Add(a);
-        //    //}
-        //}
+            //output the lowest grade possible in each course
+            foreach (string a in lowest)
+            {
+                ListBox1.Items.Add(a);
+            }
+        }
 
-        //private List<string> rec(int ind, int begin, SGrades Grades, Double gpaNeeded, List<string> lowestGrade)
-        //{
-        //    //loop for going through each grade value
-        //    for (int i = begin; i < n; i++)
-        //    {
-        //        //adds the grade to the array
-        //        buf[ind] = set[i];
-        //        //check if loop is less than the missing grade count
-        //        if (ind + 1 < k)
-        //        {
-        //            //if yes call recursive function
-        //            rec(ind + 1, i, Grades, gpaNeeded, lowestGrade);
+        private List<string> rec(int ind, int begin, SGrades Grades, Double gpaNeeded, List<string> lowestGrade)
+        {
+            //loop for going through each grade value
+            for (int i = begin; i < n; i++)
+            {
+                //adds the grade to the array
+                buf[ind] = set[i];
+                //check if loop is less than the missing grade count
+                if (ind + 1 < k)
+                {
+                    //if yes call recursive function
+                    rec(ind + 1, i, Grades, gpaNeeded, lowestGrade);
 
-        //        }
-        //        //else check quality point and output to listbox
-        //        else
-        //        {
-        //            double QualityPoints = 0;
-        //            //loop for adding up the amount of quality points in array buf
-        //            for (int idx = 0; idx < buf.Length; idx++)
-        //            {
-        //                QualityPoints += buf[idx] * UnfilledControls[idx].CreditScore;
-        //            }
-        //            //check if buf quality points is bigger than the quality points needed to pass the course
-        //            if ((QualityPoints) >= gpaNeeded)
-        //            {
-        //                List<string> SendingOut = new List<string>();
-        //                //loop through each value in array buff
-        //                foreach (int X in buf)
-        //                {
-        //                    //add them to a list
-        //                    SendingOut.Add(StaticGrades[X - 1]);
-        //                }
-        //                //output sendingout as a joined string
-        //                ///////////////////////////////////////////////////////////////////////////////////////////////////listBox1.Items.Add(string.Join(",", SendingOut));
-        //                //clear lowest grade
-        //                lowestGrade.Clear();
-        //                //set each unfilled class name with its lowest possible grade
-        //                for (int index = 0; index < UnfilledControls.Count; index++)
-        //                {
-        //                    lowestGrade.Add(UnfilledControls[index].ClassName + ":  " + SendingOut[index]);
-        //                }
-        //            }
-        //            //output for the amount of quality points in buf
-        //            //Console.WriteLine(QualityPoints);
-        //        }
-        //    }
-        //    //returns the lowest grades output to the listbox
-        //    return lowestGrade;
-        //}
+                }
+                //else check quality point and output to listbox
+                else
+                {
+                    double QualityPoints = 0;
+                    //loop for adding up the amount of quality points in array buf
+                    for (int idx = 0; idx < buf.Length; idx++)
+                    {
+                        QualityPoints += buf[idx] * Unfilled[idx].CreditScore;
+                    }
+                    //check if buf quality points is bigger than the quality points needed to pass the course
+                    if ((QualityPoints) >= gpaNeeded)
+                    {
+                        List<string> SendingOut = new List<string>();
+                        //loop through each value in array buff
+                        foreach (int X in buf)
+                        {
+                            //add them to a list
+                            SendingOut.Add(StaticGrades[X - 1]);
+                        }
+                        //output sendingout as a joined string
+                        ListBox1.Items.Add(string.Join(",", SendingOut));
+                        //clear lowest grade
+                        lowestGrade.Clear();
+                        //set each unfilled class name with its lowest possible grade
+                        for (int index = 0; index < Unfilled.Count; index++)
+                        {
+                            lowestGrade.Add(Unfilled[index].ClassName + ":  " + SendingOut[index]);
+                        }
+                    }
+                    //output for the amount of quality points in buf
+                    //Console.WriteLine(QualityPoints);
+                }
+            }
+            //returns the lowest grades output to the listbox
+            return lowestGrade;
+        }
 
         protected void CheckControlText(TextBox Box)
         {
@@ -293,7 +307,7 @@ namespace GPACalculator
         {
             //pull the sql table from the database
             string connString = SqlDataSource1.ConnectionString;
-            string query = "select * from [Classes]";
+            string query = "select * from [Table]";
             SqlConnection connection = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();
