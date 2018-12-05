@@ -188,6 +188,7 @@ namespace GPACalculator
 
             Perm(Grades, QPneeded);
         }
+
         string[] StaticGrades = new string[] { "D", "C", "B", "A" };
         static int[] set = { 4, 3, 2, 1 };
         int k, n = 4;
@@ -203,18 +204,18 @@ namespace GPACalculator
             //return list of lowestgrade
             List<string> lowest = rec(0, 0, Grades, gpaNeeded, lowestGrade);
             //check for if the student can pass the course
-            if (ListBox1.Items.Count <= 0)
+            if (listOut.Items.Count <= 0)
             {
-                ListBox1.Items.Add("No grades will make you pass, talk to your counselor about retaking courses");
+                listOut.Items.Add("No grades will make you pass, talk to your counselor about retaking courses");
             }
 
-            ListBox1.Items.Add("");
-            ListBox1.Items.Add("The Lowest grades you will need to pass in each course are:");
+            listOut.Items.Add("");
+            listOut.Items.Add("The Lowest grades you will need to pass in each course are:");
 
             //output the lowest grade possible in each course
             foreach (string a in lowest)
             {
-                ListBox1.Items.Add(a);
+                listOut.Items.Add(a);
             }
         }
 
@@ -251,8 +252,10 @@ namespace GPACalculator
                             //add them to a list
                             SendingOut.Add(StaticGrades[X - 1]);
                         }
+                        listOut.Items.Clear();
+                        listOut.Items.Add("The lowest grades you will need to pass are:");
                         //output sendingout as a joined string
-                        ListBox1.Items.Add(string.Join(",", SendingOut));
+                        listOut.Items.Add(string.Join(",", SendingOut));
                         //clear lowest grade
                         lowestGrade.Clear();
                         //set each unfilled class name with its lowest possible grade
@@ -313,7 +316,7 @@ namespace GPACalculator
         {
             //pull the sql table from the database
             string connString = SqlDataSource1.ConnectionString;
-            string query = "select * from [Classes]";
+            string query = "SELECT [Course Code],[Course Name],[Course Hours],[Course Grade] FROM [computerProgrammerView] ORDER BY [Semester]";
             SqlConnection connection = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();
