@@ -111,7 +111,11 @@ namespace GPACalculator
             Row.Cells.Add(new TableCell() { Text = dt.Rows[1].ItemArray[1].ToString() });
             Row.Cells.Add(new TableCell() { Text = "Course Name" });
             Row.Cells.Add(new TableCell() { Text = "Grade" });
-            Row.Cells.Add(new TableCell() { Text = "Course Hours" });
+            Row.Cells.Add(new TableCell()
+            {
+                Controls = { new TextBox()
+                }
+            });
             mainTable.Controls.Add(Row);
             Rows.Add(Row);
             Session["table"] = Rows;
