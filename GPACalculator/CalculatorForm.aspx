@@ -16,9 +16,9 @@
             <div class="col-md-2" style="">
                 <asp:Button ID="btnClear" runat="server" Text="Clear Form" OnClick="btnClear_Click" />
                 <br />
-                <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" />
+                <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" Width="115px" />
                 <br />
-                <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" />
+                <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" Width="115px" />
             </div>
             <div class="col-md-8">
                 <asp:Table ID="mainTable" runat="server">
