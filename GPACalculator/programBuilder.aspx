@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Table ID="mainTable" runat="server">
+            <asp:Table ID="programTable" runat="server">
                 <asp:TableHeaderRow ID="headerRow">
                     <asp:TableHeaderCell>Semester</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Course Code</asp:TableHeaderCell>

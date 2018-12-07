@@ -11,31 +11,39 @@ namespace GPACalculator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["table"] == null)
+            if (Session["programTable"] == null)
             {
-                if (int.TryParse(Request.QueryString["id"], out int Classes))
+                int numRows = Convert.ToInt32(Request.QueryString["id"]);
+                List<TableRow> Rows = new List<TableRow>();
+                for (int i = 0; i < numRows; i++)
                 {
-                    //creates a list to hold the rows
-                    List<TableRow> Rows = new List<TableRow>();
-
-                    //creates the header row of the table
                     TableRow Row = new TableRow();
-                    Row.Cells.Add(new TableCell() { Text = "Course Code" });
-                    Row.Cells.Add(new TableCell() { Text = "Grade" });
-                    Row.Cells.Add(new TableCell() { Text = "Course Hours" });
-                    mainTable.Controls.Add(Row);
+                    Row.Cells.Add(new TableCell()
+                    {
+                        Controls = {
+                        new TextBox()
+                    }
+                    });
+                    Row.Cells.Add(new TableCell()
+                    {
+                        Controls = {
+                        new TextBox()
+                    }
+                    }); Row.Cells.Add(new TableCell()
+                    {
+                        Controls = {
+                        new TextBox()
+                    }
+                    }); Row.Cells.Add(new TableCell()
+                    {
+                        Controls = {
+                        new TextBox()
+                    }
+                    });
+                    programTable.Controls.Add(Row);
                     Rows.Add(Row);
-                    Row.Cells.Add(new TableCell() { Text = "Course Name" });
-                    Session["table"] = Rows;
                 }
-            }
-            else
-            {
-                List<TableRow> Rows = Session["table"] as List<TableRow>;
-                foreach (var a in Rows)
-                {
-                    mainTable.Controls.Add(a);
-                }
+                Session["programTable"] = Rows;
             }
         }
     }
