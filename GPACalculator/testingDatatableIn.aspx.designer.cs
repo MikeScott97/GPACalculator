@@ -10,7 +10,7 @@
 namespace GPACalculator {
     
     
-    public partial class landingPage {
+    public partial class testingDatatableIn {
         
         /// <summary>
         /// form1 control.
@@ -22,39 +22,48 @@ namespace GPACalculator {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtCourseAmt control.
+        /// code1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCourseAmt;
+        protected global::System.Web.UI.WebControls.TextBox code1;
         
         /// <summary>
-        /// btnLoad control.
+        /// name1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLoad;
+        protected global::System.Web.UI.WebControls.TextBox name1;
         
         /// <summary>
-        /// courseDDL control.
+        /// hours1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList courseDDL;
+        protected global::System.Web.UI.WebControls.TextBox hours1;
         
         /// <summary>
-        /// dropBtn control.
+        /// grades1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button dropBtn;
+        protected global::System.Web.UI.WebControls.TextBox grades1;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
     }
 }

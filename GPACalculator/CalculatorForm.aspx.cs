@@ -22,29 +22,65 @@ namespace GPACalculator
         DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //calls datatable creation method
-            makeDataTable();
-
             //checks for session data then creates the table
             if (Session["table"] == null)
             {
-                if (int.TryParse(Request.QueryString["id"], out int Classes))
+                if(Request.QueryString["custom"] == "true")
                 {
-                    //creates a list to hold the rows
-                    List<TableRow> Rows = new List<TableRow>();
+                    int index = Convert.ToInt32(Request.QueryString["id"]);
+                    //create id amount of rows
+                    TableRow tableRow = null;
 
-                    //creates the header row od the table
-                    TableRow Row = new TableRow();
-                    Row.Cells.Add(new TableCell() { Text = "Course Code" });
-                    Row.Cells.Add(new TableCell() { Text = "Grade" });
-                    Row.Cells.Add(new TableCell() { Text = "Course Hours" });
-                    mainTable.Controls.Add(Row);
-                    Rows.Add(Row);
-                    Row.Cells.Add(new TableCell() { Text = "Course Name" });
-                    Session["table"] = Rows;
+                    for (int i = 0; i < index; i++)
+                    {
+                        tableRow = new TableRow();
+
+                        TextBox tbCode = new TextBox();
+                        TextBox tbName = new TextBox();
+                        TextBox tbHours = new TextBox();
+                        TextBox tbGrades = new TextBox();
+
+                        tbCode.ID = "txtCode" + i;
+                        tbName.ID = "txtName" + i;
+                        tbHours.ID = "txtHours" + i;
+                        tbGrades.ID = "txtGrades" + i;
+
+                        tableRow.Cells.Add(new TableCell()
+                        {
+                            Controls =
+                            {
+                                tbCode
+                            }
+                        });
+                        tableRow.Cells.Add(new TableCell()
+                        {
+                            Controls =
+                            {
+                                tbName
+                            }
+                        });
+                        tableRow.Cells.Add(new TableCell()
+                        {
+                            Controls =
+                            {
+                                tbHours
+                            }
+                        });
+                        tableRow.Cells.Add(new TableCell()
+                        {
+                            Controls =
+                            {
+                                tbGrades
+                            }
+                        });
+
+                        mainTable.Rows.Add(tableRow);
+                    }
                 }
                 else
                 {
+                    //calls datatable creation method
+                    makeDataTable();
                     List<TableRow> Rows = new List<TableRow>();
                     List<TextBox> gradeInput = new List<TextBox>();
                     //for loop to grab every row from the sql table
@@ -78,7 +114,6 @@ namespace GPACalculator
                         mainTable.Controls.Add(Row);
                         Rows.Add(Row);
                     }
-
                     //saves rows to session    
                     Session["table"] = Rows;
                     Session["gradeTextboxes"] = gradeInput;
@@ -224,7 +259,7 @@ namespace GPACalculator
         }
 
         private List<string> rec(int ind, int begin, SGrades Grades, Double gpaNeeded, List<string> lowestGrade)
-        {
+        {   
             //loop for going through each grade value
             for (int i = begin; i < n; i++)
             {

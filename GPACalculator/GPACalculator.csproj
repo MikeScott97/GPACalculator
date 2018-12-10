@@ -72,13 +72,14 @@
     <Content Include="CalculatorForm.aspx" />
     <Content Include="Global.asax" />
     <Content Include="landingPage.aspx" />
-    <Content Include="programBuilder.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="testingDatatableIn.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatorForm.aspx.cs">
       <DependentUpon>CalculatorForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CalculatorForm.aspx.designer.cs">
       <DependentUpon>CalculatorForm.aspx</DependentUpon>
@@ -94,14 +95,14 @@
     <Compile Include="landingPage.aspx.designer.cs">
       <DependentUpon>landingPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="programBuilder.aspx.cs">
-      <DependentUpon>programBuilder.aspx</DependentUpon>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testingDatatableIn.aspx.cs">
+      <DependentUpon>testingDatatableIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="programBuilder.aspx.designer.cs">
-      <DependentUpon>programBuilder.aspx</DependentUpon>
+    <Compile Include="testingDatatableIn.aspx.designer.cs">
+      <DependentUpon>testingDatatableIn.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
