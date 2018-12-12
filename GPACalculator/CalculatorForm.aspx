@@ -19,11 +19,19 @@
                 <asp:Button ID="btnAddClass" runat="server" Text="Add Class" OnClick="btnAddClass_Click" Width="115px" />
                 <br />
                 <asp:Button ID="btnCalc" runat="server" Text="Calculate" OnClick="btnCalc_Click" Width="115px" />
+                <br />
+                <br />
+                <br />
+                <label>Enter the name of the program:</label>
+                <br />
+                <asp:TextBox ID="txtTableName" runat="server" Text="" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please name the program"></asp:RequiredFieldValidator>
+                <br />
+                <asp:Button ID="btnSave" runat="server" Text="Save Classes" OnClick="btnSave_Click" Width="115px" />
             </div>
             <div class="col-md-8">
                 <asp:Table ID="mainTable" runat="server">
                     <asp:TableHeaderRow ID="headerRow">
-                        <asp:TableHeaderCell>Course Code</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Course Name</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Course Hours</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Course Grade</asp:TableHeaderCell>

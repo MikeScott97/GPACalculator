@@ -28,30 +28,28 @@ namespace GPACalculator
                 if(Request.QueryString["custom"] == "true")
                 {
                     int index = Convert.ToInt32(Request.QueryString["id"]);
-                    //create id amount of rows
+                    //create empty table row
                     TableRow tableRow = null;
 
+                    //create listboxes of each grade control
+                    List<TextBox> gradeInput = new List<TextBox>();
+
+                    //loop to create a row based on the number in the id
                     for (int i = 0; i < index; i++)
                     {
                         tableRow = new TableRow();
 
-                        TextBox tbCode = new TextBox();
+                        //create a texbox for each row
                         TextBox tbName = new TextBox();
                         TextBox tbHours = new TextBox();
                         TextBox tbGrades = new TextBox();
 
-                        tbCode.ID = "txtCode" + i;
+                        //give each on an id
                         tbName.ID = "txtName" + i;
                         tbHours.ID = "txtHours" + i;
                         tbGrades.ID = "txtGrades" + i;
 
-                        tableRow.Cells.Add(new TableCell()
-                        {
-                            Controls =
-                            {
-                                tbCode
-                            }
-                        });
+                        //add each textbox to a cell
                         tableRow.Cells.Add(new TableCell()
                         {
                             Controls =
@@ -74,7 +72,9 @@ namespace GPACalculator
                             }
                         });
 
+                        //commit the row to the table
                         mainTable.Rows.Add(tableRow);
+
                     }
                 }
                 else
@@ -91,7 +91,7 @@ namespace GPACalculator
                         for (int columnIndex = 0; columnIndex < dt.Columns.Count; columnIndex++)
                         {
                             //checks for grade category and creates a textbox
-                            if (columnIndex == 3)
+                            if (columnIndex == 2)
                             {
                                 TextBox tb = new TextBox();
                                 tb.ID = "txtGrade" + rowIndex;
@@ -143,7 +143,7 @@ namespace GPACalculator
                 mainTable.Controls.Add(a);
             }
             TableRow Row = new TableRow();
-            Row.Cells.Add(new TableCell() { Text = dt.Rows[1].ItemArray[1].ToString() });
+            Row.Cells.Add(new TableCell() { Text = dt.Rows[0].ItemArray[0].ToString() });
             Row.Cells.Add(new TableCell() { Text = "Course Name" });
             Row.Cells.Add(new TableCell() { Text = "Grade" });
             Row.Cells.Add(new TableCell()
@@ -186,35 +186,35 @@ namespace GPACalculator
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                Grades.TotalHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
+                Grades.TotalHours += int.Parse(dt.Rows[i].ItemArray[1].ToString());
                 if (int.TryParse(gradeInputs[i].Text, out int Grade))
                 {
                     if (GradeValues.Contains((Grade = GetGrade(Grade))))
                     {
-                        Grades.QualityPoints += (Grade * Convert.ToInt32(dt.Rows[i].ItemArray[2]));
-                        Grades.FilledHours += Convert.ToInt32(dt.Rows[i].ItemArray[2]);
+                        Grades.QualityPoints += (Grade * Convert.ToInt32(dt.Rows[i].ItemArray[1]));
+                        Grades.FilledHours += Convert.ToInt32(dt.Rows[i].ItemArray[1]);
                         Grades.FilledCount++;
                     }
                     else
                     {
                         Unfilled.Add(new ClassHolder
                         {
-                            ClassName = dt.Rows[i].ItemArray[1].ToString(),
-                            CreditScore = int.Parse(dt.Rows[i].ItemArray[2].ToString())
+                            ClassName = dt.Rows[i].ItemArray[0].ToString(),
+                            CreditScore = int.Parse(dt.Rows[i].ItemArray[1].ToString())
                         });
                         Grades.UnfilledCount++;
-                        Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
+                        Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[1].ToString());
                     }
                 }
                 else
                 {
                     Unfilled.Add(new ClassHolder
                     {
-                        ClassName = dt.Rows[i].ItemArray[1].ToString(),
-                        CreditScore = int.Parse(dt.Rows[i].ItemArray[2].ToString())
+                        ClassName = dt.Rows[i].ItemArray[0].ToString(),
+                        CreditScore = int.Parse(dt.Rows[i].ItemArray[1].ToString())
                     });
                     Grades.UnfilledCount++;
-                    Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[2].ToString());
+                    Grades.MissingHours += int.Parse(dt.Rows[i].ItemArray[1].ToString());
                 }
                 Grades.TotalCount++;
             }
@@ -355,7 +355,7 @@ namespace GPACalculator
         {
             //pull the sql table from the database
             string connString = SqlDataSource1.ConnectionString;
-            string query = "SELECT [Course Code],[Course Name],[Course Hours],[Course Grade] FROM [computerProgrammerView] ORDER BY [Semester]";
+            string query = "SELECT [Course Name],[Course Hours],[Course Grade] FROM [computerProgrammerView] ORDER BY [Semester]";
             SqlConnection connection = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();
@@ -365,6 +365,13 @@ namespace GPACalculator
             dataAdapter.Dispose();
 
         }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            string connString = SqlDataSource1.ConnectionString;
+
+        }
+
         public static int GetGrade(int Grade)
         {
             if (Grade <= 100 && Grade >= 50)
