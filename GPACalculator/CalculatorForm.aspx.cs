@@ -30,25 +30,55 @@ namespace GPACalculator
                     int index = Convert.ToInt32(Request.QueryString["id"]);
                     //create empty table row
                     TableRow tableRow = null;
+                    CustomValidator validatorGrades = null;
+                    CustomValidator validatorHours = null;
 
-                    //create listboxes of each grade control
+                    //create listboxes of each control
+                    List<TextBox> hourInput = new List<TextBox>();
                     List<TextBox> gradeInput = new List<TextBox>();
 
                     //loop to create a row based on the number in the id
                     for (int i = 0; i < index; i++)
                     {
                         tableRow = new TableRow();
+                        validatorHours = new CustomValidator();
+                        validatorGrades = new CustomValidator();
 
                         //create a texbox for each row
                         TextBox tbName = new TextBox();
                         TextBox tbHours = new TextBox();
                         TextBox tbGrades = new TextBox();
 
-                        //give each on an id
+                        //give each one an id
                         tbName.ID = "txtName" + i;
                         tbHours.ID = "txtHours" + i;
                         tbGrades.ID = "txtGrades" + i;
 
+                        tbHours.Width = 90;
+                        tbGrades.Width = 90;
+                        //append valid to the id of the textbox it is validating
+                        validatorHours.ID = "valid_" + tbHours.ID;
+                        validatorGrades.ID = "valid_" + tbGrades.ID;
+
+                        //css to make the conttrol red
+                        validatorHours.CssClass = "ErrorMessage";
+                        validatorGrades.CssClass = "ErrorMessage";
+
+                        validatorHours.ErrorMessage = "*";
+                        validatorGrades.ErrorMessage = "*";
+
+                        //allow the control to call the validation script
+                        validatorHours.EnableClientScript = true;
+                        validatorGrades.EnableClientScript = true;
+
+                        //set the control it is validating
+                        validatorHours.ControlToValidate = tbHours.ID;
+                        validatorGrades.ControlToValidate = tbGrades.ID;
+
+
+                        //the script that will be called
+                        validatorHours.ClientValidationFunction = "validateHours";
+                        validatorGrades.ClientValidationFunction = "validateHours";
                         //add each textbox to a cell
                         tableRow.Cells.Add(new TableCell()
                         {
@@ -61,21 +91,26 @@ namespace GPACalculator
                         {
                             Controls =
                             {
-                                tbHours
+                                tbHours,
+                                validatorHours
                             }
                         });
                         tableRow.Cells.Add(new TableCell()
                         {
                             Controls =
                             {
-                                tbGrades
+                                tbGrades,
+                                validatorGrades
                             }
                         });
 
+                        hourInput.Add(tbHours);
+                        gradeInput.Add(tbGrades);
                         //commit the row to the table
                         mainTable.Rows.Add(tableRow);
-
                     }
+                    Session["gradeTextboxes"] = gradeInput;
+                    Session["hourTextboxes"] = hourInput;
                 }
                 else
                 {
@@ -368,8 +403,15 @@ namespace GPACalculator
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            string connString = SqlDataSource1.ConnectionString;
-
+            if (Page.IsValid)
+            {
+                string connString = SqlDataSource1.ConnectionString;
+            }
+            else
+            {
+                RequiredFieldValidator1.ErrorMessage = "Please enter a program name";
+                RequiredFieldValidator1.Visible = true;
+            }
         }
 
         public static int GetGrade(int Grade)

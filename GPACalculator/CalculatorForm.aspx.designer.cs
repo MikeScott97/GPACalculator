@@ -103,6 +103,15 @@ namespace GPACalculator {
         protected global::System.Web.UI.WebControls.ListBox listOut;
         
         /// <summary>
+        /// errorLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorLbl;
+        
+        /// <summary>
         /// lblGPAOut control.
         /// </summary>
         /// <remarks>

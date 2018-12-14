@@ -78,6 +78,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations.cs" />
     <Compile Include="CalculatorForm.aspx.cs">
       <DependentUpon>CalculatorForm.aspx</DependentUpon>
     </Compile>
